@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DailyFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/btnPrev"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#3F51B5"
+            android:src="@drawable/baseline_keyboard_double_arrow_left_24" />
+
+        <TextView
+            android:id="@+id/tvMonthYearShow"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="5"
+            android:background="#D2C01B"
+            android:gravity="center"
+            android:text="month year"
+            android:textColor="#3F51B5"
+            android:textSize="34sp"
+            android:textStyle="bold|italic" />
+
+        <ImageView
+            android:id="@+id/btnNext"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#3F51B5"
+            android:src="@drawable/baseline_keyboard_double_arrow_right_24" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2196F3"
+            android:text="Sun"
+            android:textAlignment="center"
+            android:textColor="#FFC107" />
+
+        <TextView
+            android:id="@+id/textView31"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2196F3"
+            android:text="Mon"
+            android:textAlignment="center"
+            android:textColor="#FFC107" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2196F3"
+            android:text="Wed"
+            android:textAlignment="center"
+            android:textColor="#FFC107" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2196F3"
+            android:text="Thu"
+            android:textAlignment="center"
+            android:textColor="#FFC107" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2196F3"
+            android:text="Fri"
+            android:textAlignment="center"
+            android:textColor="#FFC107" />
+
+        <TextView
+            android:id="@+id/textView36"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2196F3"
+            android:text="Sat"
+            android:textAlignment="center"
+            android:textColor="#FFC107" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#2196F3"
+            android:text="Tue"
+            android:textAlignment="center"
+            android:textColor="#FFC107" />
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="662dp"
+        android:layout_marginTop="70dp" />
+
+</FrameLayout>
