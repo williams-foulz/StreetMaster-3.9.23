@@ -156,6 +156,7 @@ public class StudentsFragment extends Fragment {
         });
 
 
-                        return view;
-                    }
-                }
+        return view;
+    }
+
+}

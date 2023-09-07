@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="#9C27B0"
     android:padding="16dp"
     tools:layout_editor_absoluteX="-142dp"
     tools:layout_editor_absoluteY="-1dp">
@@ -267,8 +266,7 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/btnSave"
         app:layout_constraintEnd_toEndOf="@+id/btnSave"
-        app:layout_constraintStart_toStartOf="@+id/btnSave"
-        />
+        app:layout_constraintStart_toStartOf="@+id/btnSave" />
 
     <TextView
         android:id="@+id/textView"

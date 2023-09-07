@@ -179,7 +179,7 @@ public class CarEditFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), "New Car Added", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(), "car updated", Toast.LENGTH_SHORT).show();
                             FragmentTransaction fts = getFragmentManager().beginTransaction();
                             fts.replace(R.id.frmContent, new CarInfoFragment());
                             fts.addToBackStack(null);

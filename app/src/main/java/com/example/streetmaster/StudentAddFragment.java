@@ -142,11 +142,16 @@ public class StudentAddFragment extends Fragment {
 
                 steyes = etStuEyesDate.getText().toString();
 
-                if (swStuGlasses.isChecked()) {
-                    stglasses = swStuGlasses.getTextOn().toString();
-                } else {
-                    stglasses = swStuGlasses.getTextOff().toString();
-                }
+                stglasses = "No";
+                swStuGlasses.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        if (swStuGlasses.isChecked()) {
+                            stglasses = "Yes";
+                        }
+                    }
+                });
+
 
                 Student std = new Student(stfname, stlname, stid, stmobile, stadress, strank, stmedical, stbegin, sttest, steyes, stglasses);
 

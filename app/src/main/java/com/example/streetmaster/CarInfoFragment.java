@@ -1,12 +1,14 @@
 package com.example.streetmaster;
 
 
+import static com.example.streetmaster.CarAdapter.pos;
 import static com.example.streetmaster.Home_Page_Activity.currentUserIn;
 
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -24,8 +26,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.ParseException;
@@ -122,7 +127,8 @@ public class CarInfoFragment extends Fragment implements CarAdapter.CarOnListCli
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rcvCars.setLayoutManager(manager);
 
-        FirebaseFirestore.getInstance().collection(currentUserIn + "-car").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection(currentUserIn + "-car").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
@@ -171,6 +177,30 @@ public class CarInfoFragment extends Fragment implements CarAdapter.CarOnListCli
             @Override
             public void onClick(View v) {
 
+                String docID = carsListInfo.get(pos).getNumber();
+                db.collection(currentUserIn + "-car").document(docID).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isComplete()) {
+                            db.collection(currentUserIn + "-car").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                                @Override
+                                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                                    for (DocumentChange chg : value.getDocumentChanges()) {
+                                        CarStatus cr = chg.getDocument().toObject(CarStatus.class);
+                                        switch (chg.getType()) {
+                                            case REMOVED:
+                                                carsListInfo.remove(cr);
+                                                break;
+                                        }
+                                    }
+                                }
+                            });
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(getContext(), task.getException().getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
                 adapter.notifyDataSetChanged();
             }
         });

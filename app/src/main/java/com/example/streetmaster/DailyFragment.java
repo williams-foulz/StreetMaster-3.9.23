@@ -3,10 +3,18 @@ package com.example.streetmaster;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,10 +63,63 @@ public class DailyFragment extends Fragment {
         }
     }
 
+    ImageView btnNext, btnPrev;
+    TextView tvMonthYearShow;
+    RecyclerView rcvCalendar;
+    LocalDate selectedDate;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_daily, container, false);
+        View view = inflater.inflate(R.layout.fragment_daily, container, false);
+
+        btnNext = view.findViewById(R.id.btnNext);
+        btnPrev = view.findViewById(R.id.btnPrev);
+        tvMonthYearShow = view.findViewById(R.id.tvMonthYearShow);
+        rcvCalendar = view.findViewById(R.id.rcvCalendar);
+
+
+        // get the current date
+        selectedDate = LocalDate.now();
+
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // month + 1
+                selectedDate = selectedDate.plusMonths(1);
+                updateUi();
+            }
+        });
+        btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // month - 1
+                selectedDate = selectedDate.minusMonths(1);
+                updateUi();
+            }
+        });
+
+        rcvCalendar.setLayoutManager(new GridLayoutManager(getActivity(),7));
+
+        updateUi();
+        return view;
+    }
+
+    // update the date with new format
+    private void updateUi() {
+        tvMonthYearShow.setText(formatMyDate(selectedDate));
+        // create / update the adapter for the new date
+        rcvCalendar.setAdapter(new CalendarAdapter(selectedDate));
+    }
+
+    // chang date format to string
+    private String formatMyDate(LocalDate date) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM yyyy");
+        return date.format(formatter);
+
     }
 }

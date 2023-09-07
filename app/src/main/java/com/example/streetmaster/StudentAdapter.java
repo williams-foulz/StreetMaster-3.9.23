@@ -8,8 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -19,6 +23,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
     private StudentsFragment context;
     private ArrayList<Student> studentList;
     static int currentposition;
+
 
     public StudentAdapter(StudentsFragment context, ArrayList<Student> studentList) {
         this.context = context;
@@ -81,7 +86,7 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
                 });
                 dialog = builder.create();
                 dialog.show();
-                dialog.getWindow().setLayout(-1,2000);
+                dialog.getWindow().setLayout(-1, 2000);
 
                 // find view by id in dialog
                 TextView tvStuFname = dialog.findViewById(R.id.etStuFname);
@@ -113,6 +118,17 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
             }
         });
 
+        //on click student card
+        holder.imgStudentCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                std.getStdId();
+
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                Fragment myFragment = new StudentCardFragment();
+                activity.getSupportFragmentManager().beginTransaction().replace(R.id.frmContent, myFragment).addToBackStack(null).commit();
+            }
+        });
 
     }
 

@@ -52,7 +52,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
                 ModelClick.CarClicked(carSt);
 
-                // car position at click
+                // car position on click
                 pos = holder.getAdapterPosition();
 
             }

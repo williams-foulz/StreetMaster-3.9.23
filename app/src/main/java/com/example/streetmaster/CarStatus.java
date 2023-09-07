@@ -1,5 +1,9 @@
 package com.example.streetmaster;
 
+import static com.example.streetmaster.CarInfoFragment.carsListInfo;
+
+import androidx.annotation.Nullable;
+
 import java.util.Date;
 
 public class CarStatus {
@@ -25,6 +29,8 @@ public class CarStatus {
 
     public CarStatus() {
     }
+
+
 
     public String getModel() {
         return model;
@@ -103,4 +109,13 @@ public class CarStatus {
                 ", school='" + school + '\'' +
                 '}';
     }
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof CarStatus){
+             CarStatus otherCar = (CarStatus) obj;
+             return this.number.equals(otherCar.number);
+        }
+        return super.equals(obj);
+    }
+
 }
